@@ -6,6 +6,6 @@ JSON veri türleri
 * String
 * Number
 * Array
-* Object(json)
+* Object (json)
 * Boolean
 
