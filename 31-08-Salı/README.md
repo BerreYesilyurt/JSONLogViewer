@@ -24,16 +24,21 @@ Markdown bir işaretleme dilidir. Bir yazılış stilidir de diyebiliriz. Temel 
 
   ![Markdown Resmi](https://user-images.githubusercontent.com/77548130/131895946-ec6eefb7-6a84-4a3f-9778-c69b61c85cff.JPG)
   
- * Eğer "* Item1" şeklinde yazarsak karşımıza içi dolu daire çıkar.
+ * Eğer "* Item1" şeklinde yazarsak karşımıza içi dolu bir liste dairesi çıkar.
 
 ![Markdown Resmi](https://user-images.githubusercontent.com/77548130/131896433-6503c335-4684-4033-b682-e998ea34b0de.JPG)
 
-* Eğer resim konulmak(aşağıdaki örnek resim gibi) isteniyorsa aşğıdaki yol izlenmelidir:
+* Eğer resim konulmak (aşağıdaki örnek resim gibi) isteniyorsa aşağıdaki yol izlenmelidir:
 
   ![Markdown Resmi](https://user-images.githubusercontent.com/77548130/131897227-a7e9deb8-0011-4fd7-95d5-fbe0f919d575.JPG)
 
-
   ![Markdown Resmi](https://user-images.githubusercontent.com/77548130/131897042-fde851b2-d13a-4352-8838-32e487c18ddf.jpg)
+  
+  
+ * Üç tane eğik tırnak içerisine yazılan yazı daha farklı bir arkaplan ekranınd gözükür. Şunun gibi : (``` Hello World ```)
+ 
+ 
+  ![Markdown Resmi](https://user-images.githubusercontent.com/77548130/131898617-80d672eb-56ca-45f2-abd3-103d02935a18.JPG)
   
   
 
