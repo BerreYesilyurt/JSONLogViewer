@@ -1,5 +1,5 @@
-#### 02-01-Perşembe -
+#### 01-09-Çarşamba - JSON
 
-#### 01-01-Perşembe -
+#### 02-09-Perşembe - JSON'da dosya işleme
 
-#### 31-01-Perşembe -
+#### 31-08-Salı - Markdown Dili
