@@ -8,7 +8,7 @@ Markdown bir işaretleme dilidir. Bir yazılış stilidir de diyebiliriz. Temel 
 
 ![Markdown Resim](https://user-images.githubusercontent.com/77548130/131886124-38427ba0-40ac-4a54-84ca-3d541704658d.JPG)
 
-* "*Italic*" ya da "_İtalic_" şeklinde yazdırdığımızda yazı italik yazma stiline dönüşüyor.
+* "* Italic *" ya da "_ İtalic _" şeklinde yazdırdığımızda yazı italik yazma stiline dönüşüyor.
 
 ![Markdown Resim](https://user-images.githubusercontent.com/77548130/131887824-038df89a-0faf-4a09-b3e2-062f1692f849.JPG)
 
@@ -16,7 +16,7 @@ Markdown bir işaretleme dilidir. Bir yazılış stilidir de diyebiliriz. Temel 
 
 ![Markdown Resim](https://user-images.githubusercontent.com/77548130/131894032-314d437b-0342-40b1-84d5-64029c47d49d.JPG)
 
-*"> Bu bir deneme yazısıdır" şeklinde yazarsak bu işaret ile belirtili bir yazı ya da paragraf vs. oluşturulabiliyor.
+* "> Bu bir deneme yazısıdır" şeklinde yazarsak bu işaret ile belirtili bir yazı ya da paragraf vs. oluşturulabiliyor.
 
 ![Markdown Resmi](https://user-images.githubusercontent.com/77548130/131894414-ee33198b-5080-4363-89c1-b5b98f14ba2e.JPG)     
 
@@ -35,7 +35,7 @@ Markdown bir işaretleme dilidir. Bir yazılış stilidir de diyebiliriz. Temel 
   ![Markdown Resmi](https://user-images.githubusercontent.com/77548130/131897042-fde851b2-d13a-4352-8838-32e487c18ddf.jpg)
   
   
- * Üç tane eğik tırnak içerisine yazılan yazı daha farklı bir arkaplan ekranınd gözükür. Şunun gibi : (``` Hello World ```)
+ * Üç tane eğik tırnak içerisine yazılan yazı daha farklı bir arkaplan ekranında gözükür. Şunun gibi : (``` Hello World ```)
  
  
   ![Markdown Resmi](https://user-images.githubusercontent.com/77548130/131898617-80d672eb-56ca-45f2-abd3-103d02935a18.JPG)
