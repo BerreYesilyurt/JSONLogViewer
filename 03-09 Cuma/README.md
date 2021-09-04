@@ -4,5 +4,5 @@ Matplotlib kütüphanesi 2 boyutlu ve görselleştirmeye yarayan bir kütüphane
 
 ![Resim](https://user-images.githubusercontent.com/77548130/132106566-ec52affc-0010-4632-9f19-2ae2a09b0399.JPG)
 
-Yukarıdaki görselleştirmede Matplotlib ve Seaborn kütüphaneleri kullanıldı. Bunun yandında veri için JSON formatı kullanıldı. JSON formatını "list" yapısına dönüştürüp buna göre işlemler yapıldı.
+Yukarıdaki görselleştirmede Matplotlib ve Seaborn kütüphaneleri kullanıldı. Bunun yanında veri için JSON formatı kullanıldı. JSON formatını "list" yapısına dönüştürüp buna göre işlemler yapıldı.
 
