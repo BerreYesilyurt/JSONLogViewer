@@ -14,7 +14,8 @@ Piechart matplotlib yardımı ile çizilebilen grafik türlerinden birisidir. Da
 
 Kod parçasının çıktısı şu şekildedir:
 
-![Resim](https://user-images.githubusercontent.com/77548130/132470611-44c6632d-ff77-440e-ad92-0e5f23739a13.JPG)
+![Resim](https://user-images.githubusercontent.com/77548130/132585263-1c300d8d-1a6d-475a-9b13-f25e3f4df4eb.JPG)
+
 
 
 
