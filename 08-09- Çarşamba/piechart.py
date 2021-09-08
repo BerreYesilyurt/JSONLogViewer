@@ -5,8 +5,6 @@ import json
 import matplotlib.pyplot as plt
 
 
-
-
 arguman=sys.argv # JSON dosyası argüman olarak alındığı için ddiziye çevirildi
 
 try:
