@@ -5,8 +5,6 @@ import json
 import matplotlib.pyplot as plt
 
 
-#with open("pynar_log.json") as f: #JSON dosyası açılır
-    #veri=json.load(f) #JSON veriler string verilere dönüştürülür.
 
 
 arguman=sys.argv # JSON dosyası argüman olarak alındığı için ddiziye çevirildi
