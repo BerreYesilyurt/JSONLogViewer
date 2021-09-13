@@ -52,7 +52,7 @@ def howToUse(): # "How To Use" sekmesine tıklayınca yapılacak işlemler için
     
        
     <h4>JSON LOG VİEWER NASIL KULLANILIR?</h4>
-    <h5>"File" menüsünden "Open" başlığına tıkladığınızda sizi bilgisayarınızın "Bu Bilgisayar" kısmına götürür. İstediğiniz bölümden JSON dosyası seçerseniz bunu "Tab1" de dairesel,  "Tab" de çizgisel bir grafiğe dönüştürüp ekrana döker.</h5>
+    <h5>"File" menüsünden "Open" başlığına tıkladığınızda sizi bilgisayarınızın "Bu Bilgisayar" kısmına götürür. İstediğiniz bölümden JSON dosyası seçerseniz bunu "Tab1" de dairesel,  "Tab2" de çizgisel bir grafiğe dönüştürüp ekrana döker.</h5>
        
     <p><a href='https://kerteriz.net/python-json-okuma-yazma-donusturme-islemleri/'> PYTHON'DA JSON </a></p>
     <h5>JSON'ın tanımı, hangi amaçla kullanılabileceği ve dönüşümlerini içeren link yukarıda verilmiştir.</h5>
