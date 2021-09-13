@@ -18,30 +18,31 @@ basilmasayisi = []  # Birkaç kez basılan tuşların basılma sayısı da sayil
 explode = [0, 0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
 root = tk.Tk()  # Yeni bir pencere oluşturmaya yarar
-root.title("JSON Log Viewer")
-tabControl = ttk.Notebook(root)
+root.title("JSON Log Viewer") # Sayfaya isim verme
+tabControl = ttk.Notebook(root) # Üst sekmelere tıklayarak bağlantılı alt bölümlerin açılması için alan sağlanmış oldu
 
-tab1 = ttk.Frame(tabControl)
+tab1 = ttk.Frame(tabControl) # Grafikler için ayrı ayrı Frameler oluşturuldu.
 tab2 = ttk.Frame(tabControl)
 
-tabControl.add(tab1, text="Tab 1")
+tabControl.add(tab1, text="Tab 1") # Sekmelere ad verildi
 tabControl.add(tab2, text="Tab 2")
-tabControl.pack(expand=1, fill="both")
+tabControl.pack(expand=1, fill="both") # Sekmeleri buton şeklinde yerleştirebilmek için pack() kullanıldı
 
 root.geometry("700x350")  # Pencerenin boyutu
 
-p = PhotoImage(file="root.png")
+p = PhotoImage(file="root.png") # Eklenecek olan resim
 
-root.iconphoto(False, p)
+root.iconphoto(False, p) # Resmin ikon olarak gözükmesi
 
 
-def howToUse():
-    pencere1 = Toplevel()
-    pencere1.geometry("700x350")
-    pencere1.title("How To Use")
-    p1 = PhotoImage(file="root.png")
+def howToUse(): # "How To Use" sekmesine tıklayınca yapılacak işlemler için bir fonksiyon
+    pencere1 = Toplevel() # Yeni pencere açılması
+    pencere1.geometry("700x350") # Pencere boyutlandırılması
+    pencere1.title("How To Use") # Pencere başlığı
+    p1 = PhotoImage(file="root.png") # Penceredeki ikona konulaak resim
     pencere1.iconphoto(False, p1)
 
+    # Pencerede HTML formatında yazılan yazı
     howtouselabel = HTMLLabel(pencere1, html="""
 
     <h1>NEED HELP?</h1>
@@ -68,7 +69,7 @@ def howToUse():
     howtouselabel.pack(fill="both", expand=True)
 
 
-def about():
+def about(): # howToUse fonksiyonundaki kullanımla aynıdır.
     pencere2 = Toplevel()
     pencere2.geometry("700x350")
     pencere2.title("About")
