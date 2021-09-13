@@ -17,7 +17,8 @@ Tabbed Widget birden fazla pencereyi aynı ekranda, ek pencere açılmadan gör�
 * Help menüsünün alt başlıklarındaki "How To Use" uygulamanın nasıl çalıştığı ve içeriğindeki programlar, grafikler vs. hakkında birkaç bilgi ve bağlantı veriyor.
 
 ![HowToUse1](https://user-images.githubusercontent.com/77548130/133145304-03f01a70-e3e7-462f-b769-c33565400fe3.JPG)
-![HowToUse2](https://user-images.githubusercontent.com/77548130/133145397-e06ef3b6-2077-462e-91e1-617c4307e939.JPG)
+![HowToUse2](https://user-images.githubusercontent.com/77548130/133164686-bc4b8884-1cb0-4237-ae15-c3e0ebadefc2.JPG)
+
 
 *  "About" kısmında ise kişisel bilgi ve bağlantı bulunuyor.
 
