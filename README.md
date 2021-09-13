@@ -10,3 +10,5 @@
 
 #### 09-09-Perşembe - Menubar Yapımı ve Aynı Sekmede Seçilen Dosya Verileriyle Grafik Çizimi
 
+#### 13-09-Pazartesi - TabbedWidget ile Farklı Grafik Gösterimi
+
