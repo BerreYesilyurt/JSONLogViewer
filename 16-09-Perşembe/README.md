@@ -22,5 +22,13 @@ Programı çalıştırmak için programın indirildiği klasöre giderek ``` pyt
 
 ### 2. PROGRAM
 ---
+Terminalde ilgili klasöre giderek ``` python main.py ``` ile çalıştırdıktan sonra "Open" bölümünden grafik çizimi ve verileri için ilgili JSON dosyasını seçiniz.
+
+### ÖZELLİKLER
+* Dosya açma
+* Farklı çeşit grafik çizdirme
+* JSON türündeki veriyi dönüştürme
+* Veri bilgilerini tablo şeklinde görüntüleme
+
 
 
