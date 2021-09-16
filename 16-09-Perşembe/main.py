@@ -94,29 +94,6 @@ def donothing():  # Tuşların basılabilmesi için fonksiyon
     dugme.pack()
 
 
-"""def table():
-    with open(root.filename) as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
-        veri = json.load(f)  # JSON dosyası dönüştürülür
-
-    total_rows = len(veri)
-    total_columns = len(veri["action"])
-
-    for i in range(5):
-        for j in range(5):
-            e = Entry(tab1, width=20, fg='white', bg='black')
-
-            e.grid(row=i, column=j)
-            e.insert(END, veri[i][i])
-
-    figure = Figure(figsize=(16, 7), dpi=100)  # Pencerede oluşturulan tuvalin boyutu
-    plt = figure.add_subplot(1, 1, 1)
-
-    canvas = FigureCanvasTkAgg(figure, tab2)  # Belirlenen tablonun nerede gösterileceğini belirttim.
-    toolbar = NavigationToolbar2Tk(canvas, root)  # Normal matplotlib tablosunun altında yer alan toolbar için ekledim.
-    canvas.get_tk_widget().pack()"""
-
-
-
 def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     root.filename = filedialog.askopenfilename(initialdir="/", title="Select File",
                                                filetypes=(("json files", "*.json"), ("all files", "*.*")))
@@ -232,31 +209,6 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     canvas = FigureCanvasTkAgg(figure, tab2)  # Belirlenen tablonun nerede gösterileceğini belirttim.
     toolbar = NavigationToolbar2Tk(canvas, root)  # Normal matplotlib tablosunun altında yer alan toolbar için ekledim.
     canvas.get_tk_widget().pack()
-
-""" rows=[]
-
-
-    for i in range(3):
-        cols=[]
-        for j in range(29):
-            e = Entry(tab3,text="", width=40)
-            e.grid(row=j, column=i)
-            e.insert(INSERT,basilantus1[j])
-            cols.append(e)
-        rows.append(cols)"""
-
-"""def table():
-
-    with open(root.filename) as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
-        veri = json.load(f)  # JSON dosyası dönüştürülür
-
-    for i in range(len(basilantus1)):
-        for j in range(3):
-            e = Entry(tab3,text=" ", width=20)
-
-            e.grid(row=i, column=j)
-            e.insert(END, basilantus1[i])"""
-
 
 
 menubar = Menu(root)  # Menü oluşturma
