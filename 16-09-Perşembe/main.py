@@ -154,39 +154,39 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     toolbar = NavigationToolbar2Tk(canvas, root)
     canvas.get_tk_widget().pack()  # Pack ile ekranda görünmesi sağlanır
 
-    for i in range(29):
+    for i in range(29): # Basilmasayisini büyükten küçüğe doğru sıralamak için döngü kullandım
 
         for j in range(29):
 
             if (basilmasayisi[i] >= basilmasayisi[j]):
 
-                temp = basilmasayisi[i]
+                temp = basilmasayisi[i] # Küçük ise yer değiştirdim
                 basilmasayisi[i] = basilmasayisi[j]
                 basilmasayisi[j] = temp
 
-                temp1 = basilantus1[i]
+                temp1 = basilantus1[i] # Basilan tus ve basilma sayısı diilerinin indeksleri karşılıklı geldiği için basilantus dizisinde de aynı değşimi yaptım
                 basilantus1[i] = basilantus1[j]
                 basilantus1[j] = temp1
 
-    rows=[]
+    rows=[] # Verileri ekemek için satırlar
     rows1=[]
     rows2=[]
-    toplam=0
+    toplam=0 # Yüzdeyi bulabilmek için toplam değişkeni atadım
 
 
-    """for i in range(3):
-        cols=[]
+    for i in range(3): # Sütunlarda döngü
+        cols=[] # 3 tane sütun dizisi
         cols1 = []
         cols2=[]
-        if(i==0):
+        if(i==0): # Eğer birinci sütundaysa basilantus dizisinde işlem yapılır çünkü ilk sütun Key Name sütunu
             for j in range(29):
                 e = Entry(tab3, text="", width=40)
                 e.grid(row=j, column=i)
                 e.insert(INSERT, basilantus1[j])
-                cols.append(e)
-            rows.append(cols)
+                cols.append(e) # Sütun dizisine değerler eklenşr
+            rows.append(cols) # Bu değerler sonra satıra eklenir
 
-        elif(i==1):
+        elif(i==1): # Aynı işlemler basilmasayisi için de yapılır
             for k in range(29):
                 e = Entry(tab3, text="", width=40)
                 e.grid(row=k, column=i)
@@ -195,48 +195,19 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
                 toplam=toplam+basilmasayisi[k]
             rows1.append(cols)
 
-        else:
+        else: # Yüzde bulma
             oran=0
             for l in range(29):
                 e = Entry(tab3, text="", width=40)
                 e.grid(row=l, column=i)
-                oran=basilmasayisi[l]/toplam
-                e.insert(INSERT, oran)
-                cols2.append(e)
-            rows2.append(cols)"""
-
-    for i in range(3):
-        cols=[]
-        cols1 = []
-        cols2=[]
-        if(i==0):
-            for j in range(29):
-                e = Entry(tab3, text="", width=40)
-                e.grid(row=j, column=i)
-                e.insert(INSERT, basilantus1[j])
-                cols.append(e)
-            rows.append(cols)
-
-        elif(i==1):
-            for k in range(29):
-                e = Entry(tab3, text="", width=40)
-                e.grid(row=k, column=i)
-                e.insert(INSERT, basilmasayisi[k])
-                cols1.append(e)
-                toplam=toplam+basilmasayisi[k]
-            rows1.append(cols)
-
-        else:
-            oran=0
-            for l in range(29):
-                e = Entry(tab3, text="", width=40)
-                e.grid(row=l, column=i)
-                oran=(basilmasayisi[l]/toplam)*100
+                oran=(basilmasayisi[l]/toplam)*100 # Yüzdeyi bulmak için count'u toplama bölüp 100 ile çarptık
                 e.insert(INSERT, oran)
                 cols2.append(e)
             rows2.append(cols)
 
-
+    label=tk.Label(tab3,text="Key Name",bg="green",font="bold").place(x=168,y=0) # Key Name başlığı
+    label1 = tk.Label(tab3, text="Count",bg="green",font="bold").place(x=445, y=0) # Count başlığı
+    label2 = tk.Label(tab3, text="Percent",bg="green",font="bold").place(x=678, y=0) # Percent başlığı
 
     x_ekseni = list()
     y1_ekseni = list()
