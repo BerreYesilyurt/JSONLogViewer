@@ -38,7 +38,8 @@ Terminalde ilgili klasöre giderek ``` python main.py ``` ile çalıştırdıkta
 
 ![Tab 2](https://user-images.githubusercontent.com/77548130/133634956-142d5fda-8daf-4afa-9e0f-f379d5e597cc.JPG)
 
-![Tab 3](https://user-images.githubusercontent.com/77548130/133635012-a5cfa01c-880a-4898-8608-a23222680d7f.JPG)
+!![Tab 3](https://user-images.githubusercontent.com/77548130/133664213-d864d836-6834-4452-9c8a-a1ea3b5be0ff.JPG)
+
 
 
 
