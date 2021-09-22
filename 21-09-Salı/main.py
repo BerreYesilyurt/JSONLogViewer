@@ -213,9 +213,9 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
                 cols2.append(e)
             rows2.append(cols)
 
-    #label=tk.Label(tab3,text="Key Name",bg="green",font="bold").place(x=330,y=0) # Key Name başlığı
-    #label1 = tk.Label(tab3, text="Count",bg="green",font="bold").place(x=795, y=0) # Count başlığı
-    #label2 = tk.Label(tab3, text="Percent",bg="green",font="bold").place(x=1205, y=0) # Percent başlığı
+    label=tk.Label(tab3,text="Key Name",bg="green",font="bold").place(x=330,y=0) # Key Name başlığı
+    label1 = tk.Label(tab3, text="Count",bg="green",font="bold").place(x=795, y=0) # Count başlığı
+    label2 = tk.Label(tab3, text="Percent",bg="green",font="bold").place(x=1205, y=0) # Percent başlığı
 
     x_ekseni = list()
     y1_ekseni = list()
