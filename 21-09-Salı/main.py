@@ -151,7 +151,7 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     plt = figure.add_subplot(1, 1, 1)
 
 
-    fig=plt.pie(basilmasayisi, labels=basilantus1, explode=explode, wedgeprops={'edgecolor': 'black'}, radius=1.0,
+    plt.pie(basilmasayisi, labels=basilantus1, explode=explode, wedgeprops={'edgecolor': 'black'}, radius=1.0,
             textprops={'fontsize': 8, 'color': "#065535"}, rotatelabels=45,
             autopct='%1.1f%%')  # Dairesel grafiğin çizilmesi
 
@@ -213,9 +213,9 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
                 cols2.append(e)
             rows2.append(cols)
 
-    label=tk.Label(tab3,text="Key Name",bg="green",font="bold").place(x=330,y=0) # Key Name başlığı
-    label1 = tk.Label(tab3, text="Count",bg="green",font="bold").place(x=795, y=0) # Count başlığı
-    label2 = tk.Label(tab3, text="Percent",bg="green",font="bold").place(x=1205, y=0) # Percent başlığı
+    #label=tk.Label(tab3,text="Key Name",bg="green",font="bold").place(x=330,y=0) # Key Name başlığı
+    #label1 = tk.Label(tab3, text="Count",bg="green",font="bold").place(x=795, y=0) # Count başlığı
+    #label2 = tk.Label(tab3, text="Percent",bg="green",font="bold").place(x=1205, y=0) # Percent başlığı
 
     x_ekseni = list()
     y1_ekseni = list()
@@ -243,6 +243,11 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
 
 def piechartreport(): # piechart'ı pdfe dönüştürmek için çizimleri aldım ve daha sonra pdf'e dönüştürmeyi amaçladım
 
+    basilantus=[]# Tüm dizilere tekrar değer atanması için bış diziye atadım
+    basilantus1=[]
+    sayilar=[]
+    basilmasayisi=[]
+
     with open('pynar_log.json') as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
         veri = json.load(f)  # JSON dosyası dönüştürülür
 
@@ -250,27 +255,24 @@ def piechartreport(): # piechart'ı pdfe dönüştürmek için çizimleri aldım
         dizi.append(veri[i]["action"])  # Basılan tuşu bulabilmek için sözlükten bu bilgiyi çektim ve dizi[]'ye ekledim
 
     for i in range(0, 94):
-        a = 0  # a değişkeni o tuşun kaç kere basıldığını tutmak için var. Her döngüde farklı bir tuşa geçileceği için her seferinde 0'ladım.
-        a = dizi.count(veri[i][
-                           "action"])  # count metodu ile dönüştürülen dosyadaki basılan tuşların kaç defa basıldığına dair bilgiyi a değişkenine aktardık.
-        sayilar.append(a)  # Bu bilgiyi sayilar[] dizisine ekledim
+        b = 0  # a değişkeni o tuşun kaç kere basıldığını tutmak için var. Her döngüde farklı bir tuşa geçileceği için her seferinde 0'ladım.
+        b = dizi.count(veri[i]["action"])  # count metodu ile dönüştürülen dosyadaki basılan tuşların kaç defa basıldığına dair bilgiyi a değişkenine aktardık.
+        sayilar.append(b)  # Bu bilgiyi sayilar[] dizisine ekledim
 
     for i in range(0, 94):
-        if (dizi[
-            i] not in basilantus):  # Burada amaç tekrarsız bir dizi oluşturmaktır. Bu yüzden if koşulunu kullandım. Eğer basilantus[] dizisinde bu eleman yoksa:
+        if (dizi[i] not in basilantus):  # Burada amaç tekrarsız bir dizi oluşturmaktır. Bu yüzden if koşulunu kullandım. Eğer basilantus[] dizisinde bu eleman yoksa:
             basilantus.append(dizi[i])  # O olduğu zaman veriyi basilantus[] dizisine ekle
-            basilmasayisi.append(sayilar[
-                                     i])  # Aynı zamanda basılan tuşun kaç kere basıldığına karşılık gelen ve yine aynı indekste bulunan basılma sayısını basilmasayisi[] dizisine ekle
+            basilmasayisi.append(sayilar[i])  # Aynı zamanda basılan tuşun kaç kere basıldığına karşılık gelen ve yine aynı indekste bulunan basılma sayısını basilmasayisi[] dizisine ekle
 
     for i in range(0, 29):  # basilantus[] dizisinin uzunluğu adeddince döndürdüm
-        basilantus1.append((basilantus[i][13:23]))  # Sadece harflerin eklenmesi için yazdım
+        basilantus1.append((basilantus[i][13:23])) # Sadece harflerin eklenmesi için yazdım
 
     figure1 = Figure(figsize=(16, 7), dpi=100)  # Pencerede oluşturulan tuvalin boyutu
     plt = figure1.add_subplot(1, 1, 1)
 
-    plt.pie(basilmasayisi, labels=basilantus1, explode=explode, wedgeprops={'edgecolor': 'black'}, radius=1.0,
-            textprops={'fontsize': 8, 'color': "#065535"}, rotatelabels=45,
+    plt.pie(basilmasayisi, labels=basilantus1, explode=explode, wedgeprops={'edgecolor': 'black'}, radius=1.0, rotatelabels=45,
             autopct='%1.1f%%')  # Dairesel grafiğin çizilmesi
+
 
     figure1.savefig("piechart.pdf") # Dosyayı pdf olarak kaydetmek için kullandım
     sorukutusu("piechart.pdf") # Yukarıda bulunan soru kutucuğu adlı fonksiyonu çağırdım
