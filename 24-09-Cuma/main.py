@@ -1,4 +1,5 @@
 import json
+import tkinter
 from tkinter import *
 from tkinter.messagebox import askyesno
 from tkinter.ttk import *
@@ -42,15 +43,22 @@ p = PhotoImage(file="root.png")  # Eklenecek olan resim
 root.iconphoto(False, p)  # Resmin ikon olarak gözükmesi
 
 
+
+
 def howToUse():  # "How To Use" sekmesine tıklayınca yapılacak işlemler için bir fonksiyon
+
+
     pencere1 = Toplevel()  # Yeni pencere açılması
     pencere1.geometry("700x350")  # Pencere boyutlandırılması
     pencere1.title("How To Use")  # Pencere başlığı
     p1 = PhotoImage(file="root.png")  # Penceredeki ikona konulaak resim
     pencere1.iconphoto(False, p1)
 
+    scrollbar = Scrollbar(pencere1)
+    scrollbar.pack(side=RIGHT, fill=Y)
+
     # Pencerede HTML formatında yazılan yazı
-    howtouselabel = HTMLLabel(pencere1, html="""
+    howtouselabel = HTMLLabel(pencere1,yscrollcommand = scrollbar.set, html="""
 
     <h1>NEED HELP?</h1>
 
@@ -73,7 +81,15 @@ def howToUse():  # "How To Use" sekmesine tıklayınca yapılacak işlemler içi
 
         """)
 
-    howtouselabel.pack(fill="both", expand=True)
+    for line in range(100):
+        howtouselabel.insert(END,str(line))
+
+    #howtouselabel.pack(fill="both", expand=True)
+    #scrollbar(pencere1)
+    #howtouselabel.pack(side=TOP, fill=X)
+    howtouselabel.pack(side=LEFT, fill=BOTH)
+    scrollbar.config(command=howtouselabel.yview)
+
 
 
 def about():  # howToUse fonksiyonundaki kullanımla aynıdır.
@@ -83,7 +99,11 @@ def about():  # howToUse fonksiyonundaki kullanımla aynıdır.
     p2 = PhotoImage(file="root.png")
     pencere2.iconphoto(False, p2)
 
-    aboutlabel = HTMLLabel(pencere2, html="""
+    scrollbar = Scrollbar(pencere2)
+    scrollbar.pack(side=RIGHT, fill=Y)
+
+
+    aboutlabel = HTMLLabel(pencere2,yscrollcommand=scrollbar.set,html="""
 
     <p><h3> Berre Yeşilyurt  </h3></p>
 
@@ -91,11 +111,13 @@ def about():  # howToUse fonksiyonundaki kullanımla aynıdır.
     <p><a href='https://github.com/BerreYesilyurt/'>Berre Github Hesabı</a></p>
     """)
 
-    aboutlabel.pack(fill="both", expand=True)
+    #aboutlabel.pack(fill="both", expand=True)
+    aboutlabel.pack(side=LEFT,fill=BOTH)
+    scrollbar.config(command=aboutlabel.yview)
 
 
 def donothing():  # Tuşların basılabilmesi için fonksiyon
-    filewin = Toplevel(root)
+    filewin = Toplevel(tab1)
     dugme = Button(filewin, text=" ")
     dugme.pack()
 
@@ -113,18 +135,28 @@ def sorukutusu(name): # Raporlar için çıkan soru kutusunun fonksiyonu
         v.pack(side="top",expand=1,fill="both")
         v.display_file(name) # Belgeyi göstermek için display kullandık
 
+        scrollbar = Scrollbar(rapor)
+        scrollbar.pack(side=RIGHT, fill=Y)
+
+        #v.pack(side=LEFT, fill=BOTH)
+
 
 secilidosya = []
 rows = []  # Verileri ekemek için satırlar
 rows1 = []
 rows2 = []
 deneme=[]
+x=0 # Bu değikeni with open fonksiyonunu kaç kere kullandığımızı saymak için kullandım
+
+
 
 def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
+
+
     root.filename = filedialog.askopenfilename(initialdir="/", title="Select File",
                                                filetypes=(("json files", "*.json"), ("all files", "*.*")))
-
     secilidosya.append(root.filename)
+
 
     dizi = []  # Bu dizi JSON dosyadaki "Basılan tuş" veri bilgisinin alınabilmesi içindir
     basilantus = []  # # Bu ikinci diziyi basılan tuşlardan tekrarlı olanlarını bir kere tutmak için kullandım.
@@ -139,7 +171,7 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     with open(root.filename) as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
         veri = json.load(f)  # JSON dosyası dönüştürülür
 
-    for i in range(0, len(veri)):  # JSON dosyasındaki dizide 94 adet eleman olduğu için 94 kere döndürdüm.
+    for i in range(0, len(veri)):  # Seçilen JSON dosyasındaki eleman sayısınca döndürdüm.
 
         if (veri[i]["action"][0] == "Y"):
             ayirma = (veri[i]["action"]).split(":", 1)
@@ -149,7 +181,6 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
             ayirma = (veri[i]["action"]).rsplit(":", 1)
             dizi.append(ayirma[-1])  # Sadece harflerin eklenmesi için yazdım
 
-        #dizi.append(veri[i]["action"])  # Basılan tuşu bulabilmek için sözlükten bu bilgiyi çektim ve dizi[]'ye ekledim
 
     for i in range(0, len(dizi)):
         a = 0  # a değişkeni o tuşun kaç kere basıldığını tutmak için var. Her döngüde farklı bir tuşa geçileceği için her seferinde 0'ladım.
@@ -164,27 +195,12 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     for i in range(0, len(basilantus)):  # basilantus[] dizisinin uzunluğu adedince döndürdüm
         basilantus1.append((basilantus[i]))  # Sadece harflerin eklenmesi için yazdım
 
-    """for i in range(0, len(basilantus)):  # basilantus[] dizisinin uzunluğu adedince döndürdüm
-
-        if (basilantus[i][0] == "Y"):
-            ayirma = basilantus[i].split(":", 1)
-            deneme.append(ayirma[0])  # Sadece harflerin eklenmesi için yazdım
-
-        else:
-            ayirma = basilantus[i].rsplit(":", 1)
-            deneme.append(ayirma[-1])  # Sadece harflerin eklenmesi için yazdım
-
-    for i in range(0, len(deneme)):
-        if (deneme[
-            i] not in basilantus1):  # Burada amaç tekrarsız bir dizi oluşturmaktır. Bu yüzden if koşulunu kullandım. Eğer basilantus[] dizisinde bu eleman yoksa:
-            basilantus1.append(deneme[i])  # O olduğu zaman veriyi basilantus[] dizisine ekle
-            # basilmasayisi.append(sayilar[i])"""
 
     figure = Figure(figsize=(16, 7), dpi=100)  # Pencerede oluşturulan tuvalin boyutu
     plt = figure.add_subplot(1, 1, 1)
 
 
-    plt.pie(basilmasayisi, labels=basilantus1, wedgeprops={'edgecolor': 'black'},
+    daire=plt.pie(basilmasayisi, labels=basilantus1, wedgeprops={'edgecolor': 'black'},
             textprops={'fontsize': 8, 'color': "#065535"}, rotatelabels=45,
             autopct='%1.1f%%')  # Dairesel grafiğin çizilmesi
 
@@ -192,6 +208,7 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     canvas = FigureCanvasTkAgg(figure, tab1)  # Tablonun sayfası belirlenir
     toolbar = NavigationToolbar2Tk(canvas, root)
     canvas.get_tk_widget().pack()  # Pack ile ekranda görünmesi sağlanır
+
 
     toplam = 0  # Yüzdeyi bulabilmek için toplam değişkeni atadım
 
@@ -208,12 +225,6 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
                 temp1 = basilantus1[i] # Basilan tus ve basilma sayısı diilerinin indeksleri karşılıklı geldiği için basilantus dizisinde de aynı değşimi yaptım
                 basilantus1[i] = basilantus1[j]
                 basilantus1[j] = temp1
-
-    """rows=[] # Verileri ekemek için satırlar
-    rows1=[]
-    rows2=[]
-    toplam=0 # Yüzdeyi bulabilmek için toplam değişkeni atadım"""
-
 
     for i in range(3): # Sütunlarda döngü
         cols=[] # 3 tane sütun dizisi
@@ -250,6 +261,7 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     label1 = tk.Label(tab3, text="Count",bg="green",font="bold").place(x=795, y=0) # Count başlığı
     label2 = tk.Label(tab3, text="Percent",bg="green",font="bold").place(x=1205, y=0) # Percent başlığı
 
+
     x_ekseni = list()
     y1_ekseni = list()
     y2_ekseni = list()
@@ -270,23 +282,36 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     plt.legend()  # Grafik çubuklarının isimlerinin ekranda çıkması için yazdım.
     plt.grid(True)  # Arka taraftaki çizgilerin belirgin olması için True değeri verdim.
 
-    canvas = FigureCanvasTkAgg(figure, tab2)  # Belirlenen tablonun nerede gösterileceğini belirttim.
-    toolbar = NavigationToolbar2Tk(canvas, root)  # Normal matplotlib tablosunun altında yer alan toolbar için ekledim.
-    canvas.get_tk_widget().pack()
+    canvas1 = FigureCanvasTkAgg(figure, tab2)  # Belirlenen tablonun nerede gösterileceğini belirttim.
+    toolbar = NavigationToolbar2Tk(canvas1, root)  # Normal matplotlib tablosunun altında yer alan toolbar için ekledim.
+    canvas1.get_tk_widget().pack()
 
 
-def piechartreport(): # piechart'ı pdfe dönüştürmek için çizimleri aldım ve daha sonra pdf'e dönüştürmeyi amaçladım
+
+    if((len(secilidosya)>1)):
+        canvas.get_tk_widget().destroy()
+        canvas1.get_tk_widget().destroy()
+        #buttonClick()
+
+
+
+def piechartreport(x=x): # piechart'ı pdfe dönüştürmek için çizimleri aldım ve daha sonra pdf'e dönüştürmeyi amaçladım
 
     basilantus=[]# Tüm dizilere tekrar değer atanması için bış diziye atadım
     basilantus1=[]
     sayilar=[]
     basilmasayisi=[]
 
+    x=x+1
 
-    with open(root.filename) as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
+    if (len(secilidosya) == 0):
+        tkinter.messagebox.showinfo("Bilgi", "Lütfen bir dosya seçiniz.")
+
+
+    with open(root.filename) as f:  # eçilen dosyayı dosya adı olarak veriyoruz
         veri = json.load(f)  # JSON dosyası dönüştürülür
 
-    for i in range(0, len(veri)):  # JSON dosyasındaki dizide 94 adet eleman olduğu için 94 kere döndürdüm.
+    for i in range(0, len(veri)):  # Seçilen JSON dosyasındaki eleman sayısıncs döndürdüm.
 
         if (veri[i]["action"][0] == "Y"):
             ayirma = (veri[i]["action"]).split(":", 1)
@@ -311,21 +336,6 @@ def piechartreport(): # piechart'ı pdfe dönüştürmek için çizimleri aldım
     for i in range(0, len(basilantus)):  # basilantus[] dizisinin uzunluğu adedince döndürdüm
         basilantus1.append((basilantus[i]))  # Sadece harflerin eklenmesi için yazdım
 
-    """for i in range(0, len(basilantus)):  # basilantus[] dizisinin uzunluğu adedince döndürdüm
-
-        if (basilantus[i][0] == "Y"):
-            ayirma = basilantus[i].split(":", 1)
-            deneme.append(ayirma[0])  # Sadece harflerin eklenmesi için yazdım
-
-        else:
-            ayirma = basilantus[i].rsplit(":", 1)
-            deneme.append(ayirma[-1])  # Sadece harflerin eklenmesi için yazdım
-
-    for i in range(0, len(deneme)):
-        if (deneme[
-            i] not in basilantus1):  # Burada amaç tekrarsız bir dizi oluşturmaktır. Bu yüzden if koşulunu kullandım. Eğer basilantus[] dizisinde bu eleman yoksa:
-            basilantus1.append(deneme[i])  # O olduğu zaman veriyi basilantus[] dizisine ekle
-            # basilmasayisi.append(sayilar[i])"""
 
     figure1 = Figure(figsize=(16, 7), dpi=100)  # Pencerede oluşturulan tuvalin boyutu
     plt = figure1.add_subplot(1, 1, 1)
@@ -339,41 +349,16 @@ def piechartreport(): # piechart'ı pdfe dönüştürmek için çizimleri aldım
     sorukutusu("piechart.pdf")  # Yukarıda bulunan soru kutucuğu adlı fonksiyonu çağırdım
 
 
-    """with open(secilidosya[0]) as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
-        veri = json.load(f)  # JSON dosyası dönüştürülür
+def linechartreport(x=x): # linechart çizimini kullandım ve pdf olarak kaydetmeyi amaçladım
 
-    for i in range(0, len(veri)):  # JSON dosyasındaki dizide 94 adet eleman olduğu için 94 kere döndürdüm.
-        dizi.append(veri[i]["action"])  # Basılan tuşu bulabilmek için sözlükten bu bilgiyi çektim ve dizi[]'ye ekledim
+    x=x+1 # Her bir dosya açma işleminde x'i arttırdım
 
-    for i in range(0, len(veri)):
-        b = 0  # a değişkeni o tuşun kaç kere basıldığını tutmak için var. Her döngüde farklı bir tuşa geçileceği için her seferinde 0'ladım.
-        b = dizi.count(veri[i]["action"])  # count metodu ile dönüştürülen dosyadaki basılan tuşların kaç defa basıldığına dair bilgiyi a değişkenine aktardık.
-        sayilar.append(b)  # Bu bilgiyi sayilar[] dizisine ekledim
-
-    for i in range(0, len(veri)):
-        if (dizi[i] not in basilantus):  # Burada amaç tekrarsız bir dizi oluşturmaktır. Bu yüzden if koşulunu kullandım. Eğer basilantus[] dizisinde bu eleman yoksa:
-            basilantus.append(dizi[i])  # O olduğu zaman veriyi basilantus[] dizisine ekle
-            basilmasayisi.append(sayilar[i])  # Aynı zamanda basılan tuşun kaç kere basıldığına karşılık gelen ve yine aynı indekste bulunan basılma sayısını basilmasayisi[] dizisine ekle
-
-    for i in range(0, len(basilantus)):  # basilantus[] dizisinin uzunluğu adeddince döndürdüm
-        basilantus1.append((basilantus[i][14:23])) # Sadece harflerin eklenmesi için yazdım
-
-    figure1 = Figure(figsize=(16, 7), dpi=100)  # Pencerede oluşturulan tuvalin boyutu
-    plt = figure1.add_subplot(1, 1, 1)
-
-    plt.pie(basilmasayisi, labels=basilantus1, wedgeprops={'edgecolor': 'black'}, radius=1.0, rotatelabels=180,
-            autopct='%1.1f%%')  # Dairesel grafiğin çizilmesi
+    if (len(secilidosya) == 0):
+        #messagebox.show("Bilgi", "Lütfen bir dosya seçiniz.",MessageBoxButtons.OKCancel)
+        tkinter.messagebox.showinfo("Bilgi", "Lütfen bir dosya seçiniz.")
 
 
-    figure1.savefig("piechart.pdf") # Dosyayı pdf olarak kaydetmek için kullandım
-    sorukutusu("piechart.pdf") # Yukarıda bulunan soru kutucuğu adlı fonksiyonu çağırdım"""
-
-
-
-
-def linechartreport(): # linechart çizimini kullandım ve pdf olarak kaydetmeyi amaçladım
-
-    with open(secilidosya[0]) as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
+    with open(secilidosya[0]) as f:  # Seçilen dosyayı dosya adı olarak veriyoruz
         veri = json.load(f)  # JSON dosyası dönüştürülür
 
     x_ekseni = list()
@@ -399,7 +384,9 @@ def linechartreport(): # linechart çizimini kullandım ve pdf olarak kaydetmeyi
     figure2.savefig("linechart.pdf") # pdf olarak kaydetmek
     sorukutusu("linechart.pdf")
 
-def tablereport(): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek için fonksiyon
+def tablereport(x=x): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek için fonksiyon
+
+    x=x+1
 
     percent=[] # yüzde değerlerini atabilmek için bir dizi kullandım
     basilantus = []  # Tüm dizilere tekrar değer atanması için bış diziye atadım
@@ -407,20 +394,25 @@ def tablereport(): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek i�
     sayilar = []
     basilmasayisi = []
 
-    with open(secilidosya[0]) as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
+    if (len(secilidosya) == 0): # Eğer seçili bir dosya olmayıp direkt olarak rapor görüntülenmesi isteniyorsa bilgilendirici bir metin mesajaı kullandım
+        tkinter.messagebox.showinfo("Bilgi", "Lütfen bir dosya seçiniz.")
+
+
+    with open(secilidosya[0]) as f:  # Seçilen dosyayı dosya adı olarak veriyoruz
         veri = json.load(f)  # JSON dosyası dönüştürülür
 
-    for i in range(0, len(veri)):  # JSON dosyasındaki dizide 94 adet eleman olduğu için 94 kere döndürdüm.
+    for i in range(0, len(veri)):  # JSON dosyasındaki eleman sayısınca döndürdüm
 
-        if (veri[i]["action"][0] == "Y"):
+        if (veri[i]["action"][0] == "Y"): # Eğer Y ile başlıyorsa soldan başlayıp :'ı görene kadarki kısmı almasını istedim
             ayirma = (veri[i]["action"]).split(":", 1)
             dizi.append(ayirma[0])  # Sadece harflerin eklenmesi için yazdım
 
-        else:
+        else: # Değilse solsan başlamasını ve :'a kadarki bölümü almasını istedim
             ayirma = (veri[i]["action"]).rsplit(":", 1)
             dizi.append(ayirma[-1])  # Sadece harflerin eklenmesi için yazdım
 
         #dizi.append(veri[i]["action"])  # Basılan tuşu bulabilmek için sözlükten bu bilgiyi çektim ve dizi[]'ye ekledim
+
 
     for i in range(0, len(dizi)):
         a = 0  # a değişkeni o tuşun kaç kere basıldığını tutmak için var. Her döngüde farklı bir tuşa geçileceği için her seferinde 0'ladım.
@@ -450,29 +442,6 @@ def tablereport(): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek i�
                 basilantus1[j] = temp1
 
 
-
-    """with open(secilidosya[0]) as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
-        veri = json.load(f)  # JSON dosyası dönüştürülür
-
-    for i in range(0, len(veri)):  # JSON dosyasındaki dizide 94 adet eleman olduğu için 94 kere döndürdüm.
-        dizi.append(veri[i]["action"])  # Basılan tuşu bulabilmek için sözlükten bu bilgiyi çektim ve dizi[]'ye ekledim
-
-    for i in range(0, len(veri)):
-        a = 0  # a değişkeni o tuşun kaç kere basıldığını tutmak için var. Her döngüde farklı bir tuşa geçileceği için her seferinde 0'ladım.
-        a = dizi.count(veri[i][
-                           "action"])  # count metodu ile dönüştürülen dosyadaki basılan tuşların kaç defa basıldığına dair bilgiyi a değişkenine aktardık.
-        sayilar.append(a)  # Bu bilgiyi sayilar[] dizisine ekledim
-
-    for i in range(0,len(veri)):
-        if (dizi[
-            i] not in basilantus):  # Burada amaç tekrarsız bir dizi oluşturmaktır. Bu yüzden if koşulunu kullandım. Eğer basilantus[] dizisinde bu eleman yoksa:
-            basilantus.append(dizi[i])  # O olduğu zaman veriyi basilantus[] dizisine ekle
-            basilmasayisi.append(sayilar[
-                                     i])  # Aynı zamanda basılan tuşun kaç kere basıldığına karşılık gelen ve yine aynı indekste bulunan basılma sayısını basilmasayisi[] dizisine ekle
-
-    for i in range(0, len(basilantus)):  # basilantus[] dizisinin uzunluğu adeddince döndürdüm
-        basilantus1.append((basilantus[i][14:23]))  # Sadece harflerin eklenmesi için yazdım"""
-
     columns=3
     rows=len(basilantus1)
     total=0
@@ -483,7 +452,7 @@ def tablereport(): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek i�
         data[i][0] = basilantus1[i]
 
     for j in range(len(basilantus1)): # Basilma sayısını ikinci sütuna attım
-        data[j][1] = basilmasayisi[j]
+        data[j][1] = basilmasayisi[j]/(x+1)
         total=total+basilmasayisi[j]
 
     for k in range(len(basilantus1)):
@@ -492,6 +461,7 @@ def tablereport(): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek i�
 
     for l in range(len(basilantus1)):
         data[l][2]= percent[l] # percent dizisine eklenen verileri üçüncü sütuna ekledim
+
 
     items=[]
 
@@ -508,6 +478,8 @@ def tablereport(): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek i�
         ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
     ]))
 
+
+
     items.append(table) # satır ve sütunları items dizisine aktardık. Elemanları ekledik.
     doc.build([table]) # otomatik bir pdf dosyası oluşturmak için kullanılır
     sorukutusu("tablo.pdf")
@@ -515,9 +487,9 @@ def tablereport(): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek i�
 
 menubar = Menu(root)  # Menü oluşturma
 filemenu = Menu(menubar, tearoff=0)  # Sayfada kenarda açılan menünün ismi
-filemenu.add_command(label="New", command=donothing)  # Menünün altındaki alt kısımlar eklenir
+filemenu.add_command(label="New")  # Menünün altındaki alt kısımlar eklenir
 filemenu.add_command(label="Open", command=buttonClick)
-filemenu.add_command(label="Save", command=donothing)
+filemenu.add_command(label="Save")
 filemenu.add_separator()  # Ayırıcı bir çizgi çekmeye yarar
 filemenu.add_command(label="Exit", command=root.quit)
 menubar.add_cascade(label="File", menu=filemenu)
