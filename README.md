@@ -14,3 +14,5 @@
 
 #### 16-09-Perşembe - Projenin Cmd'de Çalıştırılabilmesi
 
+#### 21-09-Salı - Görselleştirilen Grafiklerin Raporlarının PDF Şekline Getirilmesi
+
