@@ -16,3 +16,5 @@
 
 #### 21-09-Salı - Görselleştirilen Grafiklerin Raporlarının PDF Şekline Getirilmesi
 
+#### 24-09-Cuma - Bugların Giderilmesi
+
