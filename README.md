@@ -12,3 +12,5 @@
 
 #### 13-09-Pazartesi - TabbedWidget ile Farklı Grafik Gösterimi
 
+#### 16-09-Perşembe - Projenin Cmd'de Çalıştırılabilmesi
+
