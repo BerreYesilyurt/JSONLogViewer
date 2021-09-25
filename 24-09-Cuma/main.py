@@ -1,5 +1,4 @@
 import json
-import tkinter
 from tkinter import *
 from tkinter.messagebox import askyesno
 from tkinter.ttk import *
@@ -23,18 +22,18 @@ sayilar = []  # Bu dizi "Tuşun basılma sayısı" verisini tutar.
 basilmasayisi = []  # Birkaç kez basılan tuşların basılma sayısı da sayilar[] dizisinde birkaç kez tutuluyor. Bu verileri tekrarsız bir şekilde tutmak için olan dizi.
 #explode = [0, 0, 0.1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-root = tk.Tk()  # Yeni bir pencere oluşturmaya yarar
+root = Tk()  # Yeni bir pencere oluşturmaya yarar
 root.title("JSON Log Viewer")  # Sayfaya isim verme
 tabControl = ttk.Notebook(root)  # Üst sekmelere tıklayarak bağlantılı alt bölümlerin açılması için alan sağlanmış oldu
 
-tab1 = ttk.Frame(tabControl)  # Grafikler için ayrı ayrı Frameler oluşturuldu.
+"""tab1 = ttk.Frame(tabControl)  # Grafikler için ayrı ayrı Frameler oluşturuldu.
 tab2 = ttk.Frame(tabControl)
 tab3=ttk.Frame(tabControl)
 
 tabControl.add(tab1, text="Tab 1")  # Sekmelere ad verildi
 tabControl.add(tab2, text="Tab 2")
 tabControl.add(tab3, text="Tab 3")
-tabControl.pack(expand=1, fill="both")  # Sekmeleri buton şeklinde yerleştirebilmek için pack() kullanıldı
+tabControl.pack(expand=1, fill="both")  # Sekmeleri buton şeklinde yerleştirebilmek için pack() kullanıldı"""
 
 root.geometry("700x350")  # Pencerenin boyutu
 
@@ -47,18 +46,18 @@ root.iconphoto(False, p)  # Resmin ikon olarak gözükmesi
 
 def howToUse():  # "How To Use" sekmesine tıklayınca yapılacak işlemler için bir fonksiyon
 
-
     pencere1 = Toplevel()  # Yeni pencere açılması
     pencere1.geometry("700x350")  # Pencere boyutlandırılması
     pencere1.title("How To Use")  # Pencere başlığı
-    p1 = PhotoImage(file="root.png")  # Penceredeki ikona konulaak resim
+    p1 = PhotoImage(file="root.png")  # Penceredeki ikona konulan resim
     pencere1.iconphoto(False, p1)
 
     scrollbar = Scrollbar(pencere1)
     scrollbar.pack(side=RIGHT, fill=Y)
 
     # Pencerede HTML formatında yazılan yazı
-    howtouselabel = HTMLLabel(pencere1,yscrollcommand = scrollbar.set, html="""
+
+    howtouselabel = HTMLLabel(pencere1, html="""
 
     <h1>NEED HELP?</h1>
 
@@ -81,18 +80,9 @@ def howToUse():  # "How To Use" sekmesine tıklayınca yapılacak işlemler içi
 
         """)
 
-    for line in range(100):
-        howtouselabel.insert(END,str(line))
-
-    #howtouselabel.pack(fill="both", expand=True)
-    #scrollbar(pencere1)
-    #howtouselabel.pack(side=TOP, fill=X)
-    howtouselabel.pack(side=LEFT, fill=BOTH)
-    scrollbar.config(command=howtouselabel.yview)
-
-
 
 def about():  # howToUse fonksiyonundaki kullanımla aynıdır.
+
     pencere2 = Toplevel()
     pencere2.geometry("700x350")
     pencere2.title("About")
@@ -103,7 +93,7 @@ def about():  # howToUse fonksiyonundaki kullanımla aynıdır.
     scrollbar.pack(side=RIGHT, fill=Y)
 
 
-    aboutlabel = HTMLLabel(pencere2,yscrollcommand=scrollbar.set,html="""
+    aboutlabel = HTMLLabel(pencere2,html="""
 
     <p><h3> Berre Yeşilyurt  </h3></p>
 
@@ -117,7 +107,7 @@ def about():  # howToUse fonksiyonundaki kullanımla aynıdır.
 
 
 def donothing():  # Tuşların basılabilmesi için fonksiyon
-    filewin = Toplevel(tab1)
+    filewin = Toplevel()
     dugme = Button(filewin, text=" ")
     dugme.pack()
 
@@ -125,11 +115,15 @@ def sorukutusu(name): # Raporlar için çıkan soru kutusunun fonksiyonu
     answer=askyesno(title="Confirmation",message="Raporu görüntülemek ister misiniz?") # Çıkan kutudaki başlık ve yazıyı askyesno ile aldık
 
     if answer: # Evete tıklanması durumunda
+
         rapor=Toplevel() # Yeni bir pencere açtık
         rapor.geometry("700x350") # Pencerenin ebatı
         rapor.title("Reports") # Pencerenin başlığı
         r = PhotoImage(file="root.png")
         rapor.iconphoto(False, r)
+
+        for i in rapor.winfo_children():  # Rapor penceresini ve çocuklarını gezdirdim
+            i.destroy()  # Bu sekmeleri kaldırmaya yarar
 
         v=DocViewer(rapor)  # Bir widget oluşturmak için kullanılıyor
         v.pack(side="top",expand=1,fill="both")
@@ -138,7 +132,19 @@ def sorukutusu(name): # Raporlar için çıkan soru kutusunun fonksiyonu
         scrollbar = Scrollbar(rapor)
         scrollbar.pack(side=RIGHT, fill=Y)
 
+
+
+
         #v.pack(side=LEFT, fill=BOTH)
+
+#def temizle(self):
+    #root.figure.clear()
+    #root.figure.add_subplot(1, 1, 1)
+    #root.canvas.clear()
+    #root.canvas1.clear()
+    #root.canvas.draw_idle()
+    #self.canvas.destroy()
+    #self.canvas = None
 
 
 secilidosya = []
@@ -147,15 +153,17 @@ rows1 = []
 rows2 = []
 deneme=[]
 x=0 # Bu değikeni with open fonksiyonunu kaç kere kullandığımızı saymak için kullandım
+sayac=0
+
+nb = ttk.Notebook(root)
+nb.pack()
 
 
 
-def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
+def buttonClick(sayac=sayac):  # Dosyanın açılabilmesi için oluşturulan fonksiyon
 
-
-    root.filename = filedialog.askopenfilename(initialdir="/", title="Select File",
-                                               filetypes=(("json files", "*.json"), ("all files", "*.*")))
-    secilidosya.append(root.filename)
+    for i in tabControl.winfo_children():  # Notebook'a ait sekmeleri gezmek için bir döngü oluşturdum.
+        i.destroy()  # Sekmeleri kaldırdım.
 
 
     dizi = []  # Bu dizi JSON dosyadaki "Basılan tuş" veri bilgisinin alınabilmesi içindir
@@ -167,6 +175,17 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     rows1 = []
     rows2 = []
     deneme = []
+
+    x=0 # Her farkı dosya açtığında burayı 0'ladım. Çünkü bu şekilde tablo kısmı doğru çalışabiliyor.
+
+    sayac=sayac+1
+
+    secilidosya.clear()
+
+    root.filename = filedialog.askopenfilename(initialdir="/", title="Select File",
+                                               filetypes=(("json files", "*.json"), ("all files", "*.*")))
+    secilidosya.append(root.filename)
+
 
     with open(root.filename) as f:  # Dosyaya root.filename ismini veriyoruz. Yani JSON dosyasını
         veri = json.load(f)  # JSON dosyası dönüştürülür
@@ -204,6 +223,10 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
             textprops={'fontsize': 8, 'color': "#065535"}, rotatelabels=45,
             autopct='%1.1f%%')  # Dairesel grafiğin çizilmesi
 
+    tab1 = ttk.Frame(tabControl)
+    tabControl.add(tab1, text="Tab 1")  # Sekmelere ad verildi
+    tabControl.pack(expand=1, fill="both")  # Sekmeleri buton şeklinde yerleştirebilmek için pack() kullanıldı
+
 
     canvas = FigureCanvasTkAgg(figure, tab1)  # Tablonun sayfası belirlenir
     toolbar = NavigationToolbar2Tk(canvas, root)
@@ -225,6 +248,9 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
                 temp1 = basilantus1[i] # Basilan tus ve basilma sayısı diilerinin indeksleri karşılıklı geldiği için basilantus dizisinde de aynı değşimi yaptım
                 basilantus1[i] = basilantus1[j]
                 basilantus1[j] = temp1
+
+    tab3 = ttk.Frame(tabControl)
+    tabControl.add(tab3, text="Tab 3")  # Sekmelere ad verildi
 
     for i in range(3): # Sütunlarda döngü
         cols=[] # 3 tane sütun dizisi
@@ -257,6 +283,7 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
                 cols2.append(e)
             rows2.append(cols)
 
+
     label=tk.Label(tab3,text="Key Name",bg="green",font="bold").place(x=330,y=0) # Key Name başlığı
     label1 = tk.Label(tab3, text="Count",bg="green",font="bold").place(x=795, y=0) # Count başlığı
     label2 = tk.Label(tab3, text="Percent",bg="green",font="bold").place(x=1205, y=0) # Percent başlığı
@@ -279,39 +306,33 @@ def buttonClick():  # Dosyanın açılabilmesi için oluşturulan fonksiyon
     plt.set_title("Zamana Göre Toplam Karakter ve Satır Sayısı")
     plt.set_xlabel("Zaman")
     plt.set_ylabel("Toplam Karakter ve Toplam Satır")
-    plt.legend()  # Grafik çubuklarının isimlerinin ekranda çıkması için yazdım.
+    cizgi=plt.legend()  # Grafik çubuklarının isimlerinin ekranda çıkması için yazdım.
     plt.grid(True)  # Arka taraftaki çizgilerin belirgin olması için True değeri verdim.
 
-    canvas1 = FigureCanvasTkAgg(figure, tab2)  # Belirlenen tablonun nerede gösterileceğini belirttim.
-    toolbar = NavigationToolbar2Tk(canvas1, root)  # Normal matplotlib tablosunun altında yer alan toolbar için ekledim.
-    canvas1.get_tk_widget().pack()
+    tab2 = ttk.Frame(tabControl)
+    tabControl.add(tab2, text="Tab 2")  # Sekmelere ad verildi
 
-
-
-    if((len(secilidosya)>1)):
-        canvas.get_tk_widget().destroy()
-        canvas1.get_tk_widget().destroy()
-        #buttonClick()
-
+    canvas = FigureCanvasTkAgg(figure, tab2)  # Belirlenen tablonun nerede gösterileceğini belirttim.
+    toolbar = NavigationToolbar2Tk(canvas, root)  # Normal matplotlib tablosunun altında yer alan toolbar için ekledim.
+    canvas.get_tk_widget().pack()
 
 
 def piechartreport(x=x): # piechart'ı pdfe dönüştürmek için çizimleri aldım ve daha sonra pdf'e dönüştürmeyi amaçladım
+
 
     basilantus=[]# Tüm dizilere tekrar değer atanması için bış diziye atadım
     basilantus1=[]
     sayilar=[]
     basilmasayisi=[]
+    dizi = []
 
     x=x+1
 
-    if (len(secilidosya) == 0):
-        tkinter.messagebox.showinfo("Bilgi", "Lütfen bir dosya seçiniz.")
 
-
-    with open(root.filename) as f:  # eçilen dosyayı dosya adı olarak veriyoruz
+    with open(secilidosya[0]) as f:  # eçilen dosyayı dosya adı olarak veriyoruz
         veri = json.load(f)  # JSON dosyası dönüştürülür
 
-    for i in range(0, len(veri)):  # Seçilen JSON dosyasındaki eleman sayısıncs döndürdüm.
+    for i in range(0, len(veri)):  # Seçilen JSON dosyasındaki eleman sayısınca döndürdüm.
 
         if (veri[i]["action"][0] == "Y"):
             ayirma = (veri[i]["action"]).split(":", 1)
@@ -353,10 +374,6 @@ def linechartreport(x=x): # linechart çizimini kullandım ve pdf olarak kaydetm
 
     x=x+1 # Her bir dosya açma işleminde x'i arttırdım
 
-    if (len(secilidosya) == 0):
-        #messagebox.show("Bilgi", "Lütfen bir dosya seçiniz.",MessageBoxButtons.OKCancel)
-        tkinter.messagebox.showinfo("Bilgi", "Lütfen bir dosya seçiniz.")
-
 
     with open(secilidosya[0]) as f:  # Seçilen dosyayı dosya adı olarak veriyoruz
         veri = json.load(f)  # JSON dosyası dönüştürülür
@@ -393,9 +410,7 @@ def tablereport(x=x): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek
     basilantus1 = []
     sayilar = []
     basilmasayisi = []
-
-    if (len(secilidosya) == 0): # Eğer seçili bir dosya olmayıp direkt olarak rapor görüntülenmesi isteniyorsa bilgilendirici bir metin mesajaı kullandım
-        tkinter.messagebox.showinfo("Bilgi", "Lütfen bir dosya seçiniz.")
+    dizi = []
 
 
     with open(secilidosya[0]) as f:  # Seçilen dosyayı dosya adı olarak veriyoruz
@@ -452,7 +467,7 @@ def tablereport(x=x): # tablonun raporunu hazırlayıp pdf'e dönüştürebilmek
         data[i][0] = basilantus1[i]
 
     for j in range(len(basilantus1)): # Basilma sayısını ikinci sütuna attım
-        data[j][1] = basilmasayisi[j]/(x+1)
+        data[j][1] = int(basilmasayisi[j])/x
         total=total+basilmasayisi[j]
 
     for k in range(len(basilantus1)):
