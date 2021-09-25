@@ -80,6 +80,9 @@ def howToUse():  # "How To Use" sekmesine tıklayınca yapılacak işlemler içi
 
         """)
 
+    howtouselabel.pack(fill="both", expand=True)
+    scrollbar.config(command=howtouselabel.yview)
+
 
 def about():  # howToUse fonksiyonundaki kullanımla aynıdır.
 
