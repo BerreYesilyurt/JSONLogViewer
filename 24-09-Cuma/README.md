@@ -1,5 +1,5 @@
 ### DÜZENLEMELER
-* Dosya raporlarıı açmadan önce ekrana bir soru kutucuğu geliyor. Evet denildiği takdirde grgafik raporu görüntülenebiliyor.
+* Dosya raporları açmadan önce ekrana bir soru kutucuğu geliyor. Evet denildiği takdirde grafik raporu görüntülenebiliyor.
 
 ![Soru](https://user-images.githubusercontent.com/77548130/134783794-af0d8206-4e43-4287-b250-d002df527394.JPG)
 
